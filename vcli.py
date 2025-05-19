@@ -6,7 +6,7 @@ import click
 import pandas as pd
 from icecream import ic
 
-from src.vcli import first_look, read_csv, scatter_matrix, cleaning
+from src.vcli import exploring, read_csv, scatter_matrix, cleaning
 
 
 @click.group()
@@ -35,7 +35,7 @@ def look(path, get_header) -> None:
     """Have a first look at the raw data"""
     click.echo("Having a first look around\n")
     p = pathlib.Path(path)
-    fl = first_look.FirstLook(p)
+    fl = exploring.Explorer(p)
     click.echo(f"The data set has {fl.get_columns_count()} columns")
 
     if get_header:

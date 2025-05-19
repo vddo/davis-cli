@@ -6,7 +6,7 @@ import pandas as pd
 """Check data before import"""
 
 
-class FirstLook:
+class Explorer:
     """First exploration of the raw data.
     Focus on finding issues that would prevent the import to a pandas DataFrame."""
 
