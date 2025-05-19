@@ -35,11 +35,21 @@ def look(path, get_header) -> None:
     """Have a first look at the raw data"""
     click.echo("Having a first look around\n")
     p = pathlib.Path(path)
-    fl = exploring.Explorer(p)
-    click.echo(f"The data set has {fl.get_columns_count()} columns")
+    expl = exploring.Explorer(p)
+    click.echo(
+        f"The data set has {expl.count_columns} columns\n"
+        + f"and {expl.count_rows} rows\n"
+    )
 
     if get_header:
-        click.echo(fl.header.to_string())
+        click.echo(expl.header.to_string())
+
+    click.echo(
+        "Mismatching Rows\n"
+        + "The following are stats of index and count of values for each rows that do not match with columns\n"
+        + "The first data points starts with index 0\n"
+    )
+    click.echo(expl.get_mismatches_stats())
 
 
 @vcli.command()
