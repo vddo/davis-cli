@@ -3,9 +3,10 @@ import pathlib
 import sys
 
 import click
+import pandas as pd
 from icecream import ic
 
-from src.vcli import read_csv, scatter_matrix, first_look
+from src.vcli import first_look, read_csv, scatter_matrix, cleaning
 
 
 @click.group()
@@ -38,7 +39,16 @@ def look(path, get_header) -> None:
     click.echo(f"The data set has {fl.get_columns_count()} columns")
 
     if get_header:
-        click.echo(fl.header)
+        click.echo(fl.header.to_string())
+
+
+@vcli.command()
+@click.argument("cleaner")
+def clean(cleaner):
+    """Chose a Cleaner [football] to clean the raw data set"""
+    match cleaner.lower():
+        case "football":
+            cleaner = cleaning.FootballCleaner()
 
 
 if __name__ == "__main__":
