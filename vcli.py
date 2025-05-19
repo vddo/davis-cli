@@ -28,12 +28,17 @@ def main() -> None:
 
 
 @vcli.command()
+@click.option("--get-header", is_flag=True)
 @click.argument("path")
-def look(path) -> None:
+def look(path, get_header) -> None:
     """Have a first look at the raw data"""
-    click.echo("Having a first look around")
+    click.echo("Having a first look around\n")
     p = pathlib.Path(path)
-    first_look.FirstLook(p)
+    fl = first_look.FirstLook(p)
+    click.echo(f"The data set has {fl.get_columns_count()} columns")
+
+    if get_header:
+        click.echo(fl.header)
 
 
 if __name__ == "__main__":

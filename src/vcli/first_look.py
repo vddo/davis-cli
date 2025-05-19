@@ -16,8 +16,7 @@ class FirstLook:
         """Gets a list of columns"""
         with open(path) as f:
             reader = csv.reader(f)
-            print(next(reader))
-            return []
+            return next(reader)
 
     def get_columns_count(self) -> int:
         """Get count of columns"""
